@@ -1,0 +1,24 @@
+<div class="row center main-container">
+	<div class="col-md-8 center primary-box ">
+		<h3>TODOS</h3>
+		<form class="form-inline">
+			<div class="form-group mx-sm-3 mb-2">
+				<label for="inputTask" class="sr-only">Password</label>
+				<input type="input" class="form-control" id="inputTask" placeholder="Add New Todo" [(ngModel)]="title" [ngModelOptions]="{standalone: true}">
+			</div>
+			<button class="btn btn-success mb-2" (click)="addTask()">Add</button>
+			<p class="error">{{err}}</p>
+		</form>
+		<p *ngIf="tasks?.length <1">No Todos Found!</p>
+		<div *ngFor="let key of keys" class="tasks-box">
+			<span class="form-check">
+			  <input class="form-check-input" type="checkbox" value="{{tasks[key].id}}" id="task-{{key}}" (change)="changeState(tasks[key].done,tasks[key].id)" [checked]="tasks[key].done">
+			  <label class="form-check-label" for="task-{{key}}" [class.done]="tasks[key].done">
+			    {{tasks[key].title}}
+			  </label>
+			</span>
+			<span class="hover-cursor text-danger pull-right item-check-right remove" (click)="deleteTask(tasks[key].id,key)"><i class="fa fa-trash-o fa-lg"></i></span>
+		</div>
+	</div>
+</div>
+
